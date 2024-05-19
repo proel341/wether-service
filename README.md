@@ -2,7 +2,7 @@
 Simple service to check wether location. Application is pet-project. Data retriew from https://www.yt.no
 
 
-## start an app container
+## Start an app container
 ```
     git clone https://github.com/proel341/wether-service.git
 ```
@@ -11,7 +11,26 @@ Simple service to check wether location. Application is pet-project. Data retrie
     cd wether-service
 ```
 
+### Start with docker
 Replace < port> to port value you need.
 ```
-    docker build -t wether-service .; docker run -p<port>:8080 wether-service
+    docker build -t wether-service .; docker run -p<port>:8080 --rm wether-service
+```
+#### Start with demon mode
+```
+    docker build -t wether-service .; docker run -p<port>:8080 --rm -d wether-service
+```
+
+### Start with node
+```
+    npm i
+    npm run start
+```
+
+
+## Testing
+
+To testing with Jest run:
+```
+    npm run test
 ```

@@ -5,14 +5,19 @@ const querystring = require('node:querystring');
 
 const { AppName } = require('../config');
 
+const StaticServer = require('./static_server');
+
 const WetherService = require('../usecase/WetherService');
 const WetherRepository = require('../adapters/repositories/WetherRepository');
 const WetherController = require('../adapters/controllers/WetherController');
+
+const staticServer = new StaticServer(fs, path);
 
 const wetherRepository = new WetherRepository(AppName);
 const wetherService = new WetherService(wetherRepository);
 const wetherController = new WetherController(wetherService);
 
+// API routes
 const get_router = {
     '/wether/moscow': (...args) => wetherController.getMoscowWether(...args),
     '/wether': (...args) => wetherController.getWetherByCoordinate(...args),
@@ -25,7 +30,18 @@ const methods = {
         const query = querystring.parse(request_url.search.slice(1));
         const send = (arg) => res.end(JSON.stringify(arg));
 
-        if (pathname in get_router) 
+        // Swagger static serving
+        if (req.url.startsWith('/docs/')) {
+           staticServer.serve(req, res);
+        }
+        // Client static serving
+        else if (req.url.startsWith('/web')) {
+           //staticServer.serve(req, res);
+           console.log(process.cwd())
+        }
+
+        // API
+        else if (pathname in get_router) 
             get_router[pathname]({query, send, body: null})
     }
 }

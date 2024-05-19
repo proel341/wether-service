@@ -41,9 +41,12 @@ class WetherRepository {
                     'User-Agent': this.AppName,
                 },
                 signal,
-            }).then(data => data.json())
-                .then(res)
-                .catch(rej)
+            }).then(data => {
+                if (data.status === 200)
+                    data.json().then(res);
+                else
+                    rej(`WehterRepository: ${data.statusText} ${data.status}`);
+            })
         });
     }
 }

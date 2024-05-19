@@ -7,16 +7,9 @@ const WetherService = require('../usecase/WetherService');
 const WetherRepository = require('../adapters/repositories/WetherRepository');
 const WetherController = require('../adapters/controllers/WetherController');
 
-const LocationRepository = require('../adapters/repositories/LocationRepository');
-
 const wetherRepository = new WetherRepository(AppName);
 const wetherService = new WetherService(wetherRepository);
 const wetherController = new WetherController(wetherService);
-
-//wetherRepository.receive(59, 10).then(console.dir, console.dir)
-//wetherService.getMoscowWether()
-//    .then(days => days.map(day => ({date: day.date, t: day.temperatures[0]})))
-//    .then(res => console.log(JSON.stringify(res)));
 
 const get_router = {
     '/wether/moscow': (...args) => wetherController.getMoscowWether(...args),
@@ -42,6 +35,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(404);
         res.end();
     }
-}).listen(8080, () => console.log(
+});
+server.listen(8080, () => console.log(
     `Сервер: ${'localhost'}:${8080} - запущен!`
-))
+));

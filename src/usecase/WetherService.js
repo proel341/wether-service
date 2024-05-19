@@ -8,34 +8,32 @@ class WetherService {
     }
 
     getWetherByCoordinate(lat, lon, time=new Date('0000T11:00:00Z')) {
-        return new Promise((res) => {
-            this.wetherRepository
-                .receive(lat, lon)
-                .then(data => {
-                    const days = [];
+        return this.wetherRepository.receive(lat, lon)
+            .then(data => {
+                const days = [];
 
-                    let Ts = [];
-                    let curDate = undefined;
-                    data.properties.timeseries.forEach(timeseria => {
-                        const t = timeseria.time.split('T');
-                        if (!curDate)
-                            curDate = new Date(`${t[0]}`);
+                let Ts = [];
+                let curDate = undefined;
+                data.properties.timeseries.forEach(timeseria => {
+                    const t = timeseria.time.split('T');
+                    if (!curDate)
+                        curDate = new Date(`${t[0]}`);
 
-                        if (curDate.getTime() !== new Date(`${t[0]}`).getTime()) {
-                            days.push(new DayWether(curDate, null, [...Ts]));
-                            curDate = new Date(`${t[0]}`);
-                            Ts = [];
-                        }
+                    if (curDate.getTime() !== new Date(`${t[0]}`).getTime()) {
+                        days.push(new DayWether(curDate, null, [...Ts]));
+                        curDate = new Date(`${t[0]}`);
+                        Ts = [];
+                    }
 
-                        Ts.push(new Temperature(
-                            new Date(`0000T${t[1]}`),
-                            timeseria.data.instant.details.air_temperature
-                        ));
-                    });
-                    days.push(new DayWether(curDate, null, [...Ts]));
-                    res(days.map(day => day.filter_temperatures_by_time(time)));
-                })
-        })
+                    Ts.push(new Temperature(
+                        new Date(`0000T${t[1]}`),
+                        timeseria.data.instant.details.air_temperature
+                    ));
+                });
+                days.push(new DayWether(curDate, null, [...Ts]));
+                return days.map(day => day.filter_temperatures_by_time(time));
+            })
+        
     }
 
     getMoscowWether(time=new Date('0000T11:00:00Z')) {

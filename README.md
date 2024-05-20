@@ -36,6 +36,7 @@ Replace < port> to port value you need.
 ### Start with node
 ```
     npm i
+    npm run build_swagger
     npm run start
 ```
 

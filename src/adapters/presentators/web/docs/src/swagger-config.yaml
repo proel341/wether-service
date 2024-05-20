@@ -33,6 +33,27 @@ components:
           type: array
           items:
             $ref: '#components/schemas/Temperature'
+    
+    Location:
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1430616
+        type: 
+          type: string
+          example: "city"
+        name:
+          type: string
+          example: "Красноярск"
+        latitude:
+          type: number
+          format: float
+          example: 56
+        longitude:
+          type: number
+          format: float
+          example: 92.8
 
 #   securitySchemes:
 #     identity_server_auth:
@@ -69,14 +90,15 @@ paths:
       responses:
         200:
           description: "OK"
-        400: 
-          description: "Bad request"
           content:
             application/json:
               schema:
                 type: array
                 items: 
                   $ref: '#/components/schemas/DayWether'
+        400: 
+          description: "Bad request"
+          
 
   /wether/moscow:
     get:
@@ -92,5 +114,54 @@ paths:
                 type: array
                 items: 
                   $ref: '#/components/schemas/DayWether'
+        400: 
+          description: "Bad request"
+
+  /location:
+    get:
+      tags: 
+        - location
+      summary: "Get location by id"
+      parameters:
+        - name: id
+          in: query
+          description: OpenStreetMap Id of the place
+          required: true
+          schema: 
+            type: integer
+            example: 1430616
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        400: 
+          description: "Bad request"
+          
+
+  /location/find:
+    get:
+      tags: 
+        - location
+      summary: "Find locations by name"
+      parameters:
+        - name: name
+          in: query
+          description: Readeble settlement name
+          required: true
+          schema: 
+            type: string
+            example: "Красноярск"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Location'
         400: 
           description: "Bad request"

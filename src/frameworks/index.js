@@ -11,16 +11,26 @@ const WetherService = require('../usecase/WetherService');
 const WetherRepository = require('../adapters/repositories/WetherRepository');
 const WetherController = require('../adapters/controllers/WetherController');
 
+const LocationRepository = require('../adapters/repositories/LocationRepository');
+const LocationService = require('../usecase/LocationService');
+const LocationController = require('../adapters/controllers/LocationController');
+
 const staticServer = new StaticServer(fs, path);
 
 const wetherRepository = new WetherRepository(AppName);
 const wetherService = new WetherService(wetherRepository);
 const wetherController = new WetherController(wetherService);
 
+const locationRepository = new LocationRepository(AppName);
+const locationService = new LocationService(locationRepository);
+const locationController = new LocationController(locationService);
+
 // API routes
 const get_router = {
     '/wether/moscow': (...args) => wetherController.getMoscowWether(...args),
     '/wether': (...args) => wetherController.getWetherByCoordinate(...args),
+    '/location/find': (...args) => locationController.findLocations(...args),
+    '/location': (...args) => locationController.getLocation(...args),
 }
 
 const methods = {

@@ -17,7 +17,6 @@ class StaticServer {
     }
 
     async prepareFile(url) {
-        console.log(url)
         const STATIC_PATH = this.path.join(process.cwd(), url)
         const paths = [STATIC_PATH];
         if (url.endsWith("/")) paths.push("index.html");

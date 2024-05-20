@@ -48,12 +48,12 @@ const methods = {
         }
 
         // Swagger static serving
-        if (req.url.startsWith('/docs/')) {
-           staticServer.serve(req, res);
+        if (req.url.startsWith('/docs')) {
+            staticServer.serve(req, res);
         }
         // Client static serving
-        else if (req.url.startsWith('/client/')) {
-           staticServer.serve(req, res);
+        else if (req.url.startsWith('/client')) {
+            staticServer.serve(req, res);
         }
 
         // API

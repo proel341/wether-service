@@ -3,7 +3,7 @@ class WetherController {
         this.wetherService = wetherService;
     }
 
-    getWetherByCoordinate({query, send}) {
+    getWetherByCoordinate({query, send, error}) {
         const {lat, lon} = query;
         console.log(lat, lon)
         if (isNaN(lat) || isNaN(lon)) {
@@ -12,11 +12,11 @@ class WetherController {
         }
 
         this.wetherService.getWetherByCoordinate(+lat, +lon)
-            .then(send, send);
+            .then(send, res => error(res, 400));
     }
-    getMoscowWether({send}) {
+    getMoscowWether({send, error}) {
         this.wetherService.getMoscowWether()
-            .then(send, send);
+            .then(send, res => error(res, 400));
     }
 
 }

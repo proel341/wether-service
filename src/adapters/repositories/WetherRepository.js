@@ -1,4 +1,4 @@
-const MAX_WAIT_TIME = 2000;
+const MAX_WAIT_TIME = 5000;
 const url = 'https://api.met.no/weatherapi/locationforecast/2.0/compact';
 
 class WetherRepository {
@@ -46,6 +46,9 @@ class WetherRepository {
                     data.json().then(res);
                 else
                     rej(`WehterRepository: ${data.statusText} ${data.status}`);
+            }).catch(err => {
+                rej("WetherRepository: Timeout error ")
+                console.log(err);
             })
         });
     }

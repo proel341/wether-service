@@ -1,0 +1,96 @@
+openapi: "3.0.0"
+info:
+  version: "0.0.1"
+  title: "Wether-Service API"
+  description: "External Wether-Service API documentation"
+# servers:
+#   - url: "http://<host>/"
+#   - description: "Identity Wether-Service API"
+components:
+  schemas:
+    Temperature:
+      type: object
+      properties:
+        time:
+          type: string
+          example: "0000-01-01T11:00:00.000Z"
+        temperature:
+          type: number
+          format: float
+          example: 21.9
+
+    DayWether:
+      type: object
+      properties:
+        date:
+          type: string
+          example: "2024-05-20T00:00:00.000Z"
+        location:
+          type: object
+          description: has null value yet. It will expand futures.
+          example: null
+        temperatures:
+          type: array
+          items:
+            $ref: '#components/schemas/Temperature'
+
+#   securitySchemes:
+#     identity_server_auth:
+#       type: oauth2
+#       flows:
+#         implicit:
+#           authorizationUrl: "https://demo.identityserver.io/connect/authorize"
+#           scopes:
+#             api: "api"
+# security:
+#   - identity_server_auth:
+#     - api
+paths:
+  /wether:
+    get:
+      tags:
+        - wether
+      summary: "Get the temperature for a few days at about 14:00 Moscow time by location"
+      parameters:
+        - name: lat
+          in: query
+          description: The place latitude
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: lon
+          in: query
+          description: The place langitude
+          required: true
+          schema:
+            type: number
+            format: float
+      responses:
+        200:
+          description: "OK"
+        400: 
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/DayWether'
+
+  /wether/moscow:
+    get:
+      tags:
+        - wether/moscow
+      summary: "Get the Moscow temperature for a few days at about 14:00 Moscow time"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/DayWether'
+        400: 
+          description: "Bad request"

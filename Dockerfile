@@ -5,6 +5,7 @@ COPY ../ /wetherService/
 WORKDIR /wetherService
 
 RUN npm i
+RUN npm run build_swagger
 
 ENTRYPOINT ["node", "./src/frameworks/index.js"]
 

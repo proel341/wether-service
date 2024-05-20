@@ -28,7 +28,14 @@ const methods = {
         const request_url = new URL(`http://localhost${req.url}`);
         const pathname = request_url.pathname;
         const query = querystring.parse(request_url.search.slice(1));
-        const send = (arg) => res.end(JSON.stringify(arg));
+        const send = (arg) => { 
+            res.writeHead(200, { "Content-Type": 'application/json' });
+            res.end(JSON.stringify(arg))
+        }
+        const error = (arg, code) => { 
+            res.writeHead(code, { "Content-Type": 'application/json' })
+            res.end(JSON.stringify(arg))
+        }
 
         // Swagger static serving
         if (req.url.startsWith('/docs/')) {
@@ -42,7 +49,7 @@ const methods = {
 
         // API
         else if (pathname in get_router) 
-            get_router[pathname]({query, send, body: null})
+            get_router[pathname]({query, send, body: null, error})
     }
 }
 

@@ -34,3 +34,10 @@ To testing with Jest run:
 ```
     npm run test
 ```
+
+# API documentation
+To see the documentations just start the project and go to http://< host>:< port>/docs/
+
+# Warning
+Possible service bug, sometimes when starting a container, outgoing requests to yr.no always exceed the timeout. It appears quite rarely.
+I haven't managed to debug it yet. To fix the behavior, just restart the container or your native node app.

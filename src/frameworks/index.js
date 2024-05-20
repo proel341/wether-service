@@ -52,9 +52,8 @@ const methods = {
            staticServer.serve(req, res);
         }
         // Client static serving
-        else if (req.url.startsWith('/web')) {
-           //staticServer.serve(req, res);
-           console.log(process.cwd())
+        else if (req.url.startsWith('/client/')) {
+           staticServer.serve(req, res);
         }
 
         // API

@@ -3,22 +3,34 @@ Simple service to check wether location. Application is pet-project. Data receiv
 
 
 ## Start an app container
+### Clone repository
 ```
     git clone https://github.com/proel341/wether-service.git
-```
-
-```
     cd wether-service
 ```
 
-### Start with docker
+### Build image and start with docker
 Replace < port> to port value you need.
 ```
-    docker build -t wether-service .; docker run -p<port>:8080 --rm wether-service
+    docker build -t wether-service .; docker run --name wether-service-container -p<port>:8080 --rm wether-service
 ```
-#### Start with demon mode
+#### Build image and start with docker demon mode
 ```
-    docker build -t wether-service .; docker run -p<port>:8080 --rm -d wether-service
+    docker build -t wether-service .; docker run --name wether-service-container -p<port>:8080 --rm -d wether-service
+```
+
+### Restart container
+```
+    docker restart wether-service-container
+```
+
+### Stop container
+```
+    docker stop wether-service-container
+```
+#### Remove docker image
+```
+    docker rmi wether-service
 ```
 
 ### Start with node

@@ -1,7 +1,7 @@
 {
   "name": "wether-service",
   "version": "1.0.0",
-  "description": "Simple service to check wether location. Application is pet-project. Data retriew from https://www.yt.no",
+  "description": "Simple service to check wether location. Application is pet-project. Data receive from https://www.yt.no",
   "main": "index.js",
   "scripts": {
     "start": "node src/frameworks/index.js",

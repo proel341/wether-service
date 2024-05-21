@@ -1,0 +1,51 @@
+#root {
+  padding: 20px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.modeSelector__option {
+  cursor: pointer;
+  display: inline-block;
+  width: 50%;
+  font-size: 22px;
+  text-align: center;
+}
+
+.modeSelector__marker {
+  position: relative;
+  height: 3px;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.87);
+  left: 0;
+  transition: left .2s ease;
+}
+
+.wether {
+  margin-top: 20px;
+  padding: 0;
+}
+
+.wether__item {
+  display: flex;
+  gap: 20px;
+
+  &:nth-child(1) {
+    margin-bottom: 10px;
+  }
+  & > p, strong {
+    flex-basis: 20%;
+  }
+}

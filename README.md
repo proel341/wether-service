@@ -1,4 +1,10 @@
 # wether-service
+The wether-service is a pet project. It is fulstack application without database.
+
+The backend side have several endpoints:
+
+- /wether 
+
 Simple service to check wether location. Application is pet-project. Data receive from https://www.yt.no
 
 
@@ -51,6 +57,5 @@ To testing with Jest run:
 # API documentation
 To see the documentations just start the project and go to http://< host>:< port>/docs/
 
-# Warning
-Possible service bug, sometimes when starting a container, outgoing requests to yr.no always exceed the timeout. It appears quite rarely.
-I haven't managed to debug it yet. To fix the behavior, just restart the container or your native node app.
+# Description
+

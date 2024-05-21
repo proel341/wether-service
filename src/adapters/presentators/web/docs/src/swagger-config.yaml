@@ -82,7 +82,7 @@ paths:
             example: 10
         - name: lon
           in: query
-          description: The place langitude
+          description: The place longitude
           required: true
           schema:
             type: number
@@ -182,7 +182,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: Readeble settlement name
+          description: Readable settlement name
           required: true
           schema: 
             type: string

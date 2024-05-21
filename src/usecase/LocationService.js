@@ -39,6 +39,7 @@ class LocationService {
                     if (data.address) {
                         if (data.address.suburb) display_name = data.address.suburb;
                         if (data.address.village) display_name = data.address.village;
+                        if (data.address.city) display_name = data.address.city;
                     }
                     return new Location(
                         data.osm_id,

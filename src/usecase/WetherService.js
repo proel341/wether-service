@@ -1,5 +1,4 @@
 const DayWether = require('../entities/DayWether');
-const Location = require('../entities/Location');
 const Temperature = require('../entities/Temperature');
 
 class WetherService {

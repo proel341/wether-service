@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const querystring = require('node:querystring');
 
-const { AppName } = require('../config');
+const { AppName, Port } = require('../config');
 
 const StaticServer = require('./static_server');
 
@@ -77,6 +77,6 @@ const server = http.createServer((req, res) => {
         res.end();
     }
 });
-server.listen(8080, () => console.log(
-    `Сервер: ${'localhost'}:${8080} - запущен!`
+server.listen(Port, () => console.log(
+    `Сервер: ${'localhost'}:${Port} - запущен!`
 ));

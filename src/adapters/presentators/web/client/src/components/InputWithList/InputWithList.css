@@ -6,6 +6,8 @@
 .input-w-list__list, .warning {
   position: absolute;
   top: 100%;
+  background-color: rgb(75, 69, 69);
+  z-index: 10;
 }
 
 .input-w-list__list {

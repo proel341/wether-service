@@ -3,11 +3,21 @@ The wether-service is a pet project. It is fulstack application without database
 
 The backend side have several endpoints:
 
-- /wether 
+| Endpoint                         | Comment                         |
+| -------------------------------- | ------------------------------- |
+| **/wether**                      |                                 |
+| **/wether/moscow**               |                                 |
+| **/location**                    |                                 |
+| **/location/find**               |                                 |
+| **/location/find_by_coordinate** |                                 |
+| **/docs/**                       | *!important! with / at the end* |
+| **/client/**                     | *!important! with / at the end* |
 
-Simple service to check wether location. Application is pet-project. Data receive from https://www.yt.no
+**You can find out more by going to /docs/.**
 
-
+---
+# Setup
+---
 ## Start an app container
 ### Clone repository
 ```
@@ -56,6 +66,3 @@ To testing with Jest run:
 
 # API documentation
 To see the documentations just start the project and go to http://< host>:< port>/docs/
-
-# Description
-

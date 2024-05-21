@@ -40,11 +40,17 @@ const methods = {
         const pathname = request_url.pathname;
         const query = querystring.parse(request_url.search.slice(1));
         const send = (arg) => { 
-            res.writeHead(200, { "Content-Type": 'application/json' });
+            res.writeHead(200, { 
+                "Content-Type": 'application/json',
+                "Access-Control-Allow-Origin": '*',
+            });
             res.end(JSON.stringify(arg))
         }
         const error = (arg, code) => { 
-            res.writeHead(code, { "Content-Type": 'application/json' })
+            res.writeHead(code, {
+                "Content-Type": 'application/json',
+                "Access-Control-Allow-Origin": '*',
+            })
             res.end(JSON.stringify(arg))
         }
 

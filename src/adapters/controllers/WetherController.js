@@ -1,5 +1,5 @@
 class WetherController {
-    constructor(wetherService) {
+    constructor(wetherService, locationService) {
         this.wetherService = wetherService;
     }
 

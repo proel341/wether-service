@@ -14,7 +14,7 @@ class LocationService {
 
     find_settlements(name) {
         return this.locationRepository.find_by_text(name)
-            .then(this._filter_by_type.bind(this))
+            //.then(this._filter_by_type.bind(this))
             .then(data => {
                 if (data.length === 0)
                     throw `The settlements with name ${name} not found`
@@ -26,6 +26,28 @@ class LocationService {
                         item.lat,
                         item.lon
                     ))
+            })
+    }
+
+    get_location_by_coordinate(lat, lon) {
+        return this.locationRepository.get_location_by_coordinate(lat, lon)
+            .then(data => {
+                if (!data)
+                    throw `The location with coordinates (lat=${lat}, lon=${lon}) not found`;
+                else {
+                    let display_name = data.display_name;
+                    if (data.address) {
+                        if (data.address.suburb) display_name = data.address.suburb;
+                        if (data.address.village) display_name = data.address.village;
+                    }
+                    return new Location(
+                        data.osm_id,
+                        data.addresstype,
+                        display_name,
+                        data.lat,
+                        data.lon
+                    )
+                }
             })
     }
 

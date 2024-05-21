@@ -26,9 +26,8 @@ components:
           type: string
           example: "2024-05-20T00:00:00.000Z"
         location:
-          type: object
-          description: has null value yet. It will expand futures.
-          example: null
+          $ref: '#components/schemas/Location'
+          description: OpenStreetMap lacation.
         temperatures:
           type: array
           items:
@@ -80,6 +79,7 @@ paths:
           schema:
             type: number
             format: float
+            example: 10
         - name: lon
           in: query
           description: The place langitude
@@ -87,6 +87,7 @@ paths:
           schema:
             type: number
             format: float
+            example: 10
       responses:
         200:
           description: "OK"
@@ -130,6 +131,38 @@ paths:
           schema: 
             type: integer
             example: 1430616
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        400: 
+          description: "Bad request"
+          
+  /location/find_by_coordinate:
+    get:
+      tags: 
+        - location
+      summary: "Get location by coordinate"
+      parameters:
+        - name: lat
+          in: query
+          description: latitude
+          required: true
+          schema: 
+            type: number
+            format: float
+            example: 56
+        - name: lon
+          in: query
+          description: longitude
+          required: true
+          schema: 
+            type: number
+            format: float
+            example: 92.8
       responses:
         200:
           description: "OK"

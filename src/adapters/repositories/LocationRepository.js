@@ -50,6 +50,31 @@ class LocationRepository {
         });
     }
 
+    get_location_by_coordinate(lat, lon) {
+        return new Promise((res, rej) => {
+            this._rps_control(rej);
+            const signal = AbortSignal.timeout(MAX_WAIT_TIME);
+
+            fetch(`${url}/reverse?lat=${lat}&lon=${lon}&format=jsonv2`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'User-Agent': this.AppName,
+                },
+                signal
+            }).then(data => {
+                if (data.status === 200){
+                    data.json().then(res);
+                }
+                else 
+                    rej(`LocationRepository: ${data.statusText} ${data.status}`);
+            }).catch(err => {
+                rej("LocationRepository: Timeout error ")
+                console.log(err);
+            })
+        })
+    }
+
     get_location_by_id(id) {
         return new Promise((res, rej) => {
             this._rps_control(rej);

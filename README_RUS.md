@@ -71,6 +71,7 @@
 ```
     npm i
     npm run build_swagger
+    npm run build_client
     npm run start
 ```
 
